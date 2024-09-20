@@ -117,7 +117,7 @@ const CustomDrawerContent = (props: any): ReactNode => {
         labelStyle={{ color: pathName === '/community' ? 'white' : '#000' }}
         style={{ backgroundColor: pathName === '/community' ? '#6b21a8' : 'white' }}
         onPress={() => {
-          router.push('/(drawer)/community');
+          router.push('/(drawer)/(tabs)/dashboard/community');
         }}
       />
       <DrawerItem
