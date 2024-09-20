@@ -6,13 +6,13 @@ const DashboardLayout = () => {
   return (
     <Stack>
       <Stack.Screen
-        name="community"
+        name="index"
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen
-        name="index"
+        name="community"
         options={{
           headerShown: false,
         }}

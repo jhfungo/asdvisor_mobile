@@ -49,7 +49,7 @@ const login = () => {
     if (data.session?.access_token) {
       navigation.reset({
         index: 0,
-        routes: [{ name: '(drawer)', params: { screen: 'dashboard' } }],
+        routes: [{ name: '(drawer)/(tabs)/dashboard', params: { screen: 'index' } }],
       });
     } else {
       console.log('Error: ', error);
