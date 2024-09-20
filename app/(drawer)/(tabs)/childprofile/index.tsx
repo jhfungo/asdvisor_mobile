@@ -1,3 +1,4 @@
+import { router } from 'expo-router';
 import React from 'react';
 import { View, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -14,13 +15,13 @@ const childprofile = () => {
           ChildName="Vico Sotto"
           Diagnosis="Diagnosed with ASD"
           Age={14}
-          onPress={() => console.log('pressed')}
+          onPress={() => router.push('/childprofile/childdetails')}
         />
         <ChildCard
           ChildName="Kaela Bico"
           Diagnosis="Diagnosed with ASD"
           Age={12}
-          onPress={() => console.log('pressed')}
+          onPress={() => console.log('pressed!')}
         />
         <ChildCard
           ChildName="Rico Baela"
