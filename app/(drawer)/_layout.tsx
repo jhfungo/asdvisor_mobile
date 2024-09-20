@@ -1,35 +1,148 @@
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
+import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
+import { ReactNode } from 'react';
+import { Feather } from '@expo/vector-icons';
+import { router, usePathname } from 'expo-router';
+import { Text, Image, View } from 'react-native';
+import { supabase } from '~/utils/supabase';
+import Entypo from '@expo/vector-icons/Entypo';
+import Fontisto from '@expo/vector-icons/Fontisto';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-import { HeaderButton } from '../../components/HeaderButton';
+const CustomDrawerContent = (props: any): ReactNode => {
+  const pathName = usePathname();
+  const logout = async () => {
+    let { error } = await supabase.auth.signOut();
+  };
 
-const DrawerLayout = () => (
-  <Drawer>
-    <Drawer.Screen
-      name="index"
-      options={{
-        headerTitle: 'Home',
-        drawerLabel: 'Home',
-        drawerIcon: ({ size, color }) => <Ionicons name="home-outline" size={size} color={color} />,
-      }}
-    />
-    <Drawer.Screen
-      name="(tabs)"
-      options={{
-        headerTitle: 'Tabs',
-        drawerLabel: 'Tabs',
-        drawerIcon: ({ size, color }) => (
-          <MaterialIcons name="border-bottom" size={size} color={color} />
-        ),
-        headerRight: () => (
-          <Link href="/modal" asChild>
-            <HeaderButton />
-          </Link>
-        ),
-      }}
-    />
-  </Drawer>
-);
+  console.log(pathName);
 
-export default DrawerLayout;
+  return (
+    <DrawerContentScrollView {...props}>
+      <View>
+        {/* <Image
+          source={require('~/assets/images/ASDVisor_Logo_2.png')}
+          resizeMode="contain"
+          className="h-40 w-40 self-center"
+        /> */}
+      </View>
+
+      <DrawerItem
+        icon={({ color, size }) => (
+          <Entypo name="home" size={24} color={pathName === '/dashboard' ? '#6b21a8' : '#000'} />
+        )}
+        label={'Home'}
+        labelStyle={{ color: pathName === '/dashboard' ? 'white' : '#000' }}
+        style={{ backgroundColor: pathName === '/dashboard' ? '#6b21a8' : 'white' }}
+        onPress={() => {
+          router.push('/(drawer)/(tabs)/dashboard');
+        }}
+      />
+
+      <DrawerItem
+        icon={({ color, size }) => (
+          <Fontisto
+            name="direction-sign"
+            size={24}
+            color={pathName === '/caredecision' ? 'white' : '#000'}
+          />
+        )}
+        label={'Care Decision'}
+        labelStyle={{ color: pathName === '/caredecision' ? 'white' : '#000' }}
+        style={{ backgroundColor: pathName === '/caredecision' ? '#6b21a8' : 'white' }}
+        onPress={() => {
+          router.push('/(drawer)/(tabs)/caredecision');
+        }}
+      />
+
+      <DrawerItem
+        icon={({ color, size }) => (
+          <FontAwesome6
+            name="children"
+            size={24}
+            color={pathName === '/childprofile' ? 'white' : '#000'}
+          />
+        )}
+        label={'Child Profile'}
+        labelStyle={{ color: pathName === '/childprofile' ? 'white' : '#000' }}
+        style={{ backgroundColor: pathName === '/childprofile' ? '#6b21a8' : 'white' }}
+        onPress={() => {
+          router.push('/(drawer)/(tabs)/childprofile');
+        }}
+      />
+
+      <DrawerItem
+        icon={({ color, size }) => (
+          <FontAwesome5
+            name="book-open"
+            size={24}
+            color={pathName === '/dailycare' ? 'white' : '#000'}
+          />
+        )}
+        label={'Daily Care'}
+        labelStyle={{ color: pathName === '/dailycare' ? 'white' : '#000' }}
+        style={{ backgroundColor: pathName === '/dailycare' ? '#6b21a8' : 'white' }}
+        onPress={() => {
+          router.push('/(drawer)/(tabs)/dailycare');
+        }}
+      />
+
+      <DrawerItem
+        icon={({ color, size }) => (
+          <MaterialIcons
+            name="calendar-month"
+            size={24}
+            color={pathName === '/appointment' ? 'white' : '#000'}
+          />
+        )}
+        label={'Appointments'}
+        labelStyle={{ color: pathName === '/appointment' ? 'white' : '#000' }}
+        style={{ backgroundColor: pathName === '/appointment' ? '#6b21a8' : 'white' }}
+        onPress={() => {
+          router.push('/(drawer)/(tabs)/appointment');
+        }}
+      />
+      <DrawerItem
+        icon={({ color, size }) => (
+          <MaterialIcons
+            name="calendar-month"
+            size={24}
+            color={pathName === '/community' ? 'white' : '#000'}
+          />
+        )}
+        label={'Community'}
+        labelStyle={{ color: pathName === '/community' ? 'white' : '#000' }}
+        style={{ backgroundColor: pathName === '/community' ? '#6b21a8' : 'white' }}
+        onPress={() => {
+          router.push('/(drawer)/community');
+        }}
+      />
+      <DrawerItem
+        icon={({ color, size }) => <MaterialIcons name="logout" size={24} color="red" />}
+        label="Logout"
+        labelStyle={{ color: 'red' }}
+        onPress={() => {
+          logout();
+          router.replace('/');
+        }}
+      />
+    </DrawerContentScrollView>
+  );
+};
+
+export default function Layout() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Drawer
+        screenOptions={{
+          headerShown: true,
+          headerTitle: 'ASDVisor',
+          headerTitleAlign: 'center',
+        }}
+        drawerContent={(props) => <CustomDrawerContent {...props} />}></Drawer>
+    </GestureHandlerRootView>
+  );
+}

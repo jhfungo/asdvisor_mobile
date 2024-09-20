@@ -1,26 +1,52 @@
 import { Tabs } from 'expo-router';
-
-import { TabBarIcon } from '~/components/TabBarIcon';
+import Entypo from '@expo/vector-icons/Entypo';
+import Fontisto from '@expo/vector-icons/Fontisto';
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'black',
+        tabBarActiveTintColor: '#6b21a8',
       }}>
       <Tabs.Screen
-        name="index"
+        name="dashboard"
         options={{
-          title: 'Tab One',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Dashboard',
+          tabBarIcon: ({ color }) => <Entypo name="home" size={24} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="caredecision"
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Care Decision',
+          tabBarIcon: ({ color }) => <Fontisto name="direction-sign" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="childprofile"
+        options={{
+          title: 'Child Profile',
+          tabBarIcon: ({ color }) => <FontAwesome6 name="children" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="dailycare"
+        options={{
+          title: 'Daily Care',
+          tabBarIcon: ({ color }) => <FontAwesome5 name="book-open" size={24} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="appointment"
+        options={{
+          title: 'Appointment',
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="calendar-month" size={24} color={color} />
+          ),
         }}
       />
     </Tabs>
