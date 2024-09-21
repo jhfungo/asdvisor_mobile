@@ -30,6 +30,13 @@ const RootLayout = () => {
           }}
         />
         <Stack.Screen
+          name="createappointment"
+          options={{
+            headerShown: true,
+            headerTitle: 'Create Appointment',
+          }}
+        />
+        <Stack.Screen
           name="login"
           options={{
             headerShown: true,

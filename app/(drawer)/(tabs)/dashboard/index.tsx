@@ -9,22 +9,22 @@ import Feather from '@expo/vector-icons/Feather';
 import { router } from 'expo-router';
 
 const Dashboard = () => {
-  useEffect(() => {
-    let toast = Toast.show('Logged In', {
-      duration: Toast.durations.LONG,
-      backgroundColor: '#6b21a8',
-      position: 1,
-    });
-  }, []);
+  // useEffect(() => {
+  //   let toast = Toast.show('Logged In', {
+  //     duration: Toast.durations.LONG,
+  //     backgroundColor: '#6b21a8',
+  //     position: 1,
+  //   });
+  // }, []);
   return (
     <ScrollView>
       <View className="mx-4 flex-1">
         <AppGradient classStyles="flex-row justify-center items-center mt-3">
-          <View className=" w-3/5">
-            <Text className="mb-5 text-center text-2xl font-bold text-white">
+          <View className=" w-3/5 ml-2">
+            <Text className="mb-5 text-center text-xl font-bold text-white">
               Any specific problems?
             </Text>
-            <Text className="text-wrap text-center text-base text-white">
+            <Text className="text-wrap text-center text-base text-white px-2">
               Use our Care Decision System for personalized recommendations
             </Text>
           </View>
