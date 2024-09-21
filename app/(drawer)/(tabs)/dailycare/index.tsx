@@ -6,7 +6,7 @@ import '~/global.css';
 const dailycare = () => {
   return (
     <ScrollView>
-      <Text className="ml-2 mt-8 text-left text-7xl font-bold">Daily Care</Text>
+      <Text className="ml-2 mt-8 text-left text-6xl font-bold">Daily Care</Text>
       <View className="mt-3 flex flex-row flex-wrap justify-evenly">
           <Card />
           <Card />
