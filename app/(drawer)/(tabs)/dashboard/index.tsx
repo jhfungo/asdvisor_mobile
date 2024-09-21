@@ -67,7 +67,7 @@ const Dashboard = () => {
         </View>
 
         {/* Community */}
-        <AppGradient classStyles="mt-3" onPress={() => router.push('/dashboard/community')}>
+        <AppGradient classStyles="mt-3" onPress={() => router.push('/community')}>
           <View className="flex-1 flex-row items-center justify-between px-6 py-6">
             <View className="flex-row items-center">
               <Text className="mr-2 text-3xl font-bold text-white">Community</Text>

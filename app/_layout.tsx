@@ -6,7 +6,10 @@ import '~/global.css';
 const RootLayout = () => {
   return (
     <RootSiblingParent>
-      <Stack>
+      <Stack
+        screenOptions={{
+          headerBackTitle: 'Back',
+        }}>
         <Stack.Screen
           name="index"
           options={{
@@ -18,7 +21,14 @@ const RootLayout = () => {
           options={{
             headerShown: false,
           }}
-        /> 
+        />
+        <Stack.Screen
+          name="createpost"
+          options={{
+            headerShown: true,
+            headerTitle: 'Post',
+          }}
+        />
         <Stack.Screen
           name="login"
           options={{

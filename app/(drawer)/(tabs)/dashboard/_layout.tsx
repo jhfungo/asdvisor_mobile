@@ -11,12 +11,12 @@ const DashboardLayout = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="community"
         options={{
           headerShown: false,
         }}
-      />
+      /> */}
     </Stack>
   );
 };
