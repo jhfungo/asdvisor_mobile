@@ -1,7 +1,8 @@
 import { View, Text, Image, ImageBackground, Pressable } from 'react-native';
 import React from 'react';
-import { Button } from 'react-native-paper';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
+import { Button } from 'react-native-paper';
+
 import AntDesign from '@expo/vector-icons/AntDesign';
 
 const ChildProfilePage = () => {
@@ -21,22 +22,22 @@ const ChildProfilePage = () => {
   ];
   return (
     <>
-      <ScrollView className="mx-3 px-3">
+      <ScrollView className="mx-2 px-2">
         <Text className=" mt-8 text-left text-6xl font-bold">Child Details</Text>
         <View className="my-5 flex-row items-center">
           <Text className="text-5xl">Vico Sotto</Text>
-          <Button mode="outlined" onPress={() => console.log('Pressed')} className="ml-12">
+          <Button mode="outlined" onPress={() => console.log('Pressed')} className="ml-8">
             Edit Profile
           </Button>
         </View>
         <View className="flex-row">
           <Text className="text-xl font-bold">Birhdate</Text>
-          <Text className="pl-24 text-xl font-bold">05/12/2011</Text>
+          <Text className="pl-24 text-lg">05/12/2011</Text>
         </View>
         <View className="mt-8 flex-row">
           <Text className="text-xl font-bold">Assessment</Text>
           <View className="pr-10">
-            <Text className="ml-8 text-wrap pl-6 pr-6 text-xl font-bold">
+            <Text className="ml-8 text-wrap pl-6 pr-6 text-lg">
               Hypersensory Overload and Autism Spectrum Disorder
             </Text>
           </View>
@@ -108,7 +109,6 @@ const ChildProfilePage = () => {
           onPress={() => console.log('Pressed')}
           className="justify-center items-center"
           contentStyle={{ 
-            paddingVertical: 10,
             paddingVertical: 10,
            }}>
           <AntDesign name="plus" size={24} color="black" className=''/>
