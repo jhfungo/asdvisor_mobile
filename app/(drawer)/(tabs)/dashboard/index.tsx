@@ -42,7 +42,7 @@ const Dashboard = () => {
           <Text className="text-2xl font-bold ">Upcoming Appointments</Text>
           <Text>View All</Text>
         </View>
-        <View className="my-2 flex flex-row rounded-2xl bg-slate-300 p-2">
+        <View className="my-2 flex flex-row rounded-2xl bg-white shadow shadow-slate-200 p-2">
           <View className="flex flex-row items-center justify-center">
             <View>
               <Image

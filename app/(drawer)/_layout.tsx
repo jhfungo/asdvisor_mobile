@@ -2,15 +2,17 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Drawer } from 'expo-router/drawer';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { ReactNode } from 'react';
-import { Feather } from '@expo/vector-icons';
+import { AntDesign, Feather, Ionicons } from '@expo/vector-icons';
 import { router, usePathname } from 'expo-router';
-import { Text, Image, View } from 'react-native';
+import { Text, Image, View, Pressable } from 'react-native';
 import { supabase } from '~/utils/supabase';
 import Entypo from '@expo/vector-icons/Entypo';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
+import { Button } from 'react-native-paper';
 
 const CustomDrawerContent = (props: any): ReactNode => {
   const pathName = usePathname();
@@ -62,7 +64,7 @@ const CustomDrawerContent = (props: any): ReactNode => {
         icon={({ color, size }) => (
           <FontAwesome6
             name="children"
-            size={24}
+            size={20}
             color={pathName === '/childprofile' ? 'white' : '#000'}
           />
         )}
@@ -107,8 +109,8 @@ const CustomDrawerContent = (props: any): ReactNode => {
       />
       <DrawerItem
         icon={({ color, size }) => (
-          <MaterialIcons
-            name="calendar-month"
+          <Ionicons
+            name="chatbubble-ellipses-sharp"
             size={24}
             color={pathName === '/community' ? 'white' : '#000'}
           />
@@ -141,6 +143,13 @@ export default function Layout() {
           headerShown: true,
           headerTitle: 'ASDVisor',
           headerTitleAlign: 'center',
+          headerTintColor: '#6b21a8',
+          headerTitleStyle: { color: 'black' },
+          headerRight: () => (
+            <Pressable onPress={() => alert('Pressed User Button')}>
+              <FontAwesome5 name="user-circle" size={24} color="#6b21a8" className="mr-3" />
+            </Pressable>
+          ),
         }}
         drawerContent={(props) => <CustomDrawerContent {...props} />}></Drawer>
     </GestureHandlerRootView>
