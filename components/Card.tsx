@@ -1,9 +1,16 @@
 import { View, Text, Image } from 'react-native';
 import React from 'react';
+import { Title } from 'react-native-paper';
 
-const Card = () => {
+interface cardStyleProps {
+  color?: string;
+  textColor?: string;
+  title: string;
+}
+
+const Card = ({ color, textColor, title }: cardStyleProps) => {
   return (
-    <View className="my-2 flex h-56 w-44 rounded-lg bg-slate-200">
+    <View className={`my-2 flex h-56 w-44 rounded-lg bg-slate-200 ${color}`}>
       <View>
         <Image
           source={require('~/assets/images/nurse.png')}
@@ -12,7 +19,7 @@ const Card = () => {
         />
       </View>
       <View className="flex-1 justify-center">
-        <Text className="flex-wrap px-5 text-center font-bold ">Help your Child Go to Bed</Text>
+        <Text className={`flex-wrap px-5 text-center font-bold ${textColor}`}>{title}</Text>
       </View>
     </View>
   );

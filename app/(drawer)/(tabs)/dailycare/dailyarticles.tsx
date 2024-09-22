@@ -1,12 +1,42 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, Image, ScrollView } from 'react-native';
+import React from 'react';
 
 const dailyarticles = () => {
+  const url = 'https://loremflickr.com/320/240';
   return (
-    <View>
-      <Text>dailyarticles</Text>
-    </View>
-  )
-}
+    <ScrollView className="m-5">
+      <View className="mb-5">
+        <Text className="text-xl">Guide</Text>
+        <Text className="text-wrap text-4xl font-bold">How to Handle Panic Attacks</Text>
+        <Text>Written by Dr. Jane Doe</Text>
+      </View>
+      <Image source={{ uri: url }} resizeMode="contain" className="h-60 w-full" />
+      <View className='mt-5'>
+        <Text className='text-2xl text-justify'>
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa mollitia exercitationem
+          corporis doloribus minus illo ducimus necessitatibus laudantium eum esse officia quas
+          earum itaque nostrum tempore deleniti suscipit praesentium debitis, aliquid, voluptate
+          corrupti amet, veniam autem! Assumenda repellendus nesciunt dolorem odio deleniti, eum
+          eveniet corrupti mollitia, debitis praesentium veniam reiciendis!
 
-export default dailyarticles
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa mollitia exercitationem
+          corporis doloribus minus illo ducimus necessitatibus laudantium eum esse officia quas
+          earum itaque nostrum tempore deleniti suscipit praesentium debitis, aliquid, voluptate
+          corrupti amet, veniam autem! Assumenda repellendus nesciunt dolorem odio deleniti, eum
+          eveniet corrupti mollitia, debitis praesentium veniam reiciendis!
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa mollitia exercitationem
+          corporis doloribus minus illo ducimus necessitatibus laudantium eum esse officia quas
+          earum itaque nostrum tempore deleniti suscipit praesentium debitis, aliquid, voluptate
+          corrupti amet, veniam autem! Assumenda repellendus nesciunt dolorem odio deleniti, eum
+          eveniet corrupti mollitia, debitis praesentium veniam reiciendis!          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa mollitia exercitationem
+          corporis doloribus minus illo ducimus necessitatibus laudantium eum esse officia quas
+          earum itaque nostrum tempore deleniti suscipit praesentium debitis, aliquid, voluptate
+          corrupti amet, veniam autem! Assumenda repellendus nesciunt dolorem odio deleniti, eum
+          eveniet corrupti mollitia, debitis praesentium veniam reiciendis!
+        </Text>
+      </View>
+    </ScrollView>
+  );
+};
+
+export default dailyarticles;
