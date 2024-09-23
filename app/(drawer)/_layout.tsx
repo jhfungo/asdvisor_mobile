@@ -146,7 +146,7 @@ export default function Layout() {
           headerTintColor: '#6b21a8',
           headerTitleStyle: { color: 'black' },
           headerRight: () => (
-            <Pressable onPress={() => alert('Pressed User Button')}>
+            <Pressable onPress={() => router.push('/(modal)/usermodal')}>
               <FontAwesome5 name="user-circle" size={24} color="#6b21a8" className="mr-3" />
             </Pressable>
           ),
