@@ -1,8 +1,10 @@
-import { View, Text } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import React from 'react';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import '~/global.css';
+import { Button } from 'react-native-paper';
+import { FontAwesome5 } from '@expo/vector-icons';
 const RootLayout = () => {
   return (
     <RootSiblingParent>
@@ -26,7 +28,11 @@ const RootLayout = () => {
           name="createpost"
           options={{
             headerShown: true,
-            headerTitle: 'Post',
+            headerTitle: '',
+            headerRight: () => (
+              <Button mode='contained-tonal' onPress={() => alert('Post Created')}>Post
+              </Button>
+            ),
           }}
         />
         <Stack.Screen

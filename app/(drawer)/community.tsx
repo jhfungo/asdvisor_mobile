@@ -1,7 +1,8 @@
 import { View, Text, SafeAreaView, RefreshControl, FlatList, Pressable } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, Button } from 'react-native-paper';
 import { router } from 'expo-router';
+import { AntDesign } from '@expo/vector-icons';
 
 const community = () => {
   // const [refreshing, setRefreshing] = useState(true);
@@ -49,8 +50,9 @@ const community = () => {
 
   // console.log(userData);
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
-      {/* <View>
+    <>
+      <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+        {/* <View>
         {refreshing ? <ActivityIndicator /> : null}
         <FlatList
           data={userData.reverse()}
@@ -60,8 +62,19 @@ const community = () => {
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={loadUserData} />}
         />
       </View> */}
-      <Pressable onPress={()=> router.push('/createpost')}><Text>Test</Text></Pressable>
-    </SafeAreaView>
+      </SafeAreaView>
+      <View className="absolute bottom-5 right-5">
+        <Button
+          mode="contained-tonal"
+          onPress={() => router.push('/createpost')}
+          className="items-center justify-center"
+          contentStyle={{
+            paddingVertical: 10,
+          }}>
+          <AntDesign name="plus" size={24} color="black" className="" />
+        </Button>
+      </View>
+    </>
   );
 };
 
