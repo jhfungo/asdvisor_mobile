@@ -4,6 +4,8 @@ import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { Button } from 'react-native-paper';
 
 import AntDesign from '@expo/vector-icons/AntDesign';
+import ChildDetailCard from '~/components/ChildDetailCard';
+import { router } from 'expo-router';
 
 const ChildProfilePage = () => {
   const DATA = [
@@ -47,16 +49,11 @@ const ChildProfilePage = () => {
           <FlatList
             data={DATA}
             renderItem={({ item }) => (
-              <Pressable onPress={() => console.log('Pressed')}>
-                <View className="mx-1 mt-2 h-36 w-36  overflow-hidden rounded-2xl bg-slate-600">
-                  <ImageBackground
-                    source={{ uri: 'https://loremflickr.com/320/240/kids/all' }}
-                    resizeMode="cover"
-                    className="h-full w-full items-center justify-end pb-3 ">
-                    <Text className="text-base font-bold text-white">03/05/2023</Text>
-                  </ImageBackground>
-                </View>
-              </Pressable>
+              <ChildDetailCard
+                onPress={() => router.push('/childprofile/detailarticle')}
+                url="https://loremflickr.com/320/240/kids/all"
+                date="03/05/2023"
+              />
             )}
             keyExtractor={(item) => item.id}
             horizontal
@@ -67,16 +64,11 @@ const ChildProfilePage = () => {
           <FlatList
             data={DATA}
             renderItem={({ item }) => (
-              <Pressable onPress={() => console.log('Pressed')}>
-                <View className="mx-1 mt-2 h-36 w-36  overflow-hidden rounded-2xl bg-slate-600">
-                  <ImageBackground
-                    source={{ uri: 'https://loremflickr.com/320/240/children/all' }}
-                    resizeMode="cover"
-                    className="h-full w-full items-center justify-end pb-3 ">
-                    <Text className="text-base font-bold text-white">03/05/2023</Text>
-                  </ImageBackground>
-                </View>
-              </Pressable>
+              <ChildDetailCard
+                onPress={() => console.log('Pressed')}
+                url="https://loremflickr.com/320/240/children/all"
+                date="03/05/2023"
+              />
             )}
             keyExtractor={(item) => item.id}
             horizontal
@@ -87,16 +79,11 @@ const ChildProfilePage = () => {
           <FlatList
             data={DATA}
             renderItem={({ item }) => (
-              <Pressable onPress={() => console.log('Pressed')}>
-                <View className="mx-1 mt-2 h-36 w-36  overflow-hidden rounded-2xl bg-slate-600">
-                  <ImageBackground
-                    source={{ uri: 'https://loremflickr.com/320/240/boys,girls' }}
-                    resizeMode="cover"
-                    className="h-full w-full items-center justify-end pb-3 ">
-                    <Text className="text-base font-bold text-white">03/05/2023</Text>
-                  </ImageBackground>
-                </View>
-              </Pressable>
+              <ChildDetailCard
+                onPress={() => console.log('Pressed')}
+                url="https://loremflickr.com/320/240/boys,girls"
+                date="03/05/2023"
+              />
             )}
             keyExtractor={(item) => item.id}
             horizontal
@@ -107,11 +94,11 @@ const ChildProfilePage = () => {
         <Button
           mode="contained-tonal"
           onPress={() => console.log('Pressed')}
-          className="justify-center items-center"
-          contentStyle={{ 
+          className="items-center justify-center"
+          contentStyle={{
             paddingVertical: 10,
-           }}>
-          <AntDesign name="plus" size={24} color="black" className=''/>
+          }}>
+          <AntDesign name="plus" size={24} color="black" className="" />
         </Button>
       </View>
     </>

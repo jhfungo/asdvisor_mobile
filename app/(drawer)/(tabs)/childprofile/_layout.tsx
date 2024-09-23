@@ -17,6 +17,12 @@ const ChildProfileStack = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="detailarticle"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 };

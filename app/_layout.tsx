@@ -57,6 +57,10 @@ const RootLayout = () => {
             headerTitle: 'Recover Password',
           }}
         />
+        <Stack.Screen
+          name="(modal)/usermodal"
+          options={{ headerShown: false, presentation: 'modal' }}
+        />
       </Stack>
     </RootSiblingParent>
   );
