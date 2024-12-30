@@ -1,42 +1,49 @@
 import { View, Text, Image, ScrollView } from 'react-native';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { supabase } from '~/utils/supabase';
 
-const dailyarticles = () => {
+const Dailyarticles = () => {
+  const website = 'https://nizspdeeeeizctxbgawz.supabase.co/storage/v1/object/public/Images/';
+  const [dailycare, setDailycare] = useState<{ title: string; body: string; image: string }[]>([]);
+  useEffect(() => {
+    const getArticle = async () => {
+      let { data: dailycare, error } = await supabase
+        .from('dailycare')
+        .select('title, body, image')
+        .eq('id', 3);
+
+      console.log(error);
+
+      if (dailycare) {
+        setDailycare(dailycare);
+        console.log(dailycare);
+      }
+    };
+
+    getArticle();
+  }, []);
   const url = 'https://loremflickr.com/320/240';
   return (
     <ScrollView className="m-5">
-      <View className="mb-5">
-        <Text className="text-xl">Guide</Text>
-        <Text className="text-wrap text-4xl font-bold">How to Handle Panic Attacks</Text>
-        <Text>Written by Dr. Jane Doe</Text>
-      </View>
-      <Image source={{ uri: url }} resizeMode="contain" className="h-60 w-full" />
-      <View className='mt-5'>
-        <Text className='text-2xl text-justify'>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa mollitia exercitationem
-          corporis doloribus minus illo ducimus necessitatibus laudantium eum esse officia quas
-          earum itaque nostrum tempore deleniti suscipit praesentium debitis, aliquid, voluptate
-          corrupti amet, veniam autem! Assumenda repellendus nesciunt dolorem odio deleniti, eum
-          eveniet corrupti mollitia, debitis praesentium veniam reiciendis!
-
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa mollitia exercitationem
-          corporis doloribus minus illo ducimus necessitatibus laudantium eum esse officia quas
-          earum itaque nostrum tempore deleniti suscipit praesentium debitis, aliquid, voluptate
-          corrupti amet, veniam autem! Assumenda repellendus nesciunt dolorem odio deleniti, eum
-          eveniet corrupti mollitia, debitis praesentium veniam reiciendis!
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa mollitia exercitationem
-          corporis doloribus minus illo ducimus necessitatibus laudantium eum esse officia quas
-          earum itaque nostrum tempore deleniti suscipit praesentium debitis, aliquid, voluptate
-          corrupti amet, veniam autem! Assumenda repellendus nesciunt dolorem odio deleniti, eum
-          eveniet corrupti mollitia, debitis praesentium veniam reiciendis!          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa mollitia exercitationem
-          corporis doloribus minus illo ducimus necessitatibus laudantium eum esse officia quas
-          earum itaque nostrum tempore deleniti suscipit praesentium debitis, aliquid, voluptate
-          corrupti amet, veniam autem! Assumenda repellendus nesciunt dolorem odio deleniti, eum
-          eveniet corrupti mollitia, debitis praesentium veniam reiciendis!
-        </Text>
-      </View>
+      {dailycare[0] && (
+        <>
+          <View className="mb-5">
+            <Text className="text-xl">Guide</Text>
+            <Text className="text-wrap text-4xl font-bold">{dailycare[0].title}</Text>
+            <Text>Written by Dr. Jane Doe</Text>
+          </View>
+          <Image
+            source={{ uri: `${website}${dailycare[0].image}` }}
+            resizeMode="stretch"
+            className="h-72 w-full bg-gray-900"
+          />
+          <View className="mt-5">
+            <Text className="text-justify text-2xl">{dailycare[0].body}</Text>
+          </View>
+        </>
+      )}
     </ScrollView>
   );
 };
 
-export default dailyarticles;
+export default Dailyarticles;

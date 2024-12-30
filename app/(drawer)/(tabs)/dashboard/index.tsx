@@ -7,24 +7,39 @@ import Card from '~/components/Card';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
 import { router } from 'expo-router';
+import { supabase } from '~/utils/supabase';
+import userStore from '~/store/userStore';
 
 const Dashboard = () => {
-  // useEffect(() => {
-  //   let toast = Toast.show('Logged In', {
-  //     duration: Toast.durations.LONG,
-  //     backgroundColor: '#6b21a8',
-  //     position: 1,
-  //   });
-  // }, []);
+  const addUser = userStore((state) => state.setUser);
+  useEffect(() => {
+    const getUserMetadata = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      queryProfile(user?.id, user?.email);
+    };
+    const queryProfile = async (id: string | undefined, email: string | undefined) => {
+      const { data: user, error } = await supabase
+        .from('user')
+        .select('first_name, last_name, contact, role')
+        .eq('id', id);
+
+      if (user)
+        addUser(id, user[0].first_name, user[0].last_name, email, user[0].contact, user[0].role);
+      console.log('DONE');
+    };
+    getUserMetadata();
+  }, []);
   return (
     <ScrollView>
       <View className="mx-4 flex-1">
         <AppGradient classStyles="flex-row justify-center items-center mt-3">
-          <View className=" w-3/5 ml-2">
+          <View className=" ml-2 w-3/5">
             <Text className="mb-5 text-center text-xl font-bold text-white">
               Any specific problems?
             </Text>
-            <Text className="text-wrap text-center text-base text-white px-2">
+            <Text className="text-wrap px-2 text-center text-base text-white">
               Use our Care Decision System for personalized recommendations
             </Text>
           </View>
@@ -38,11 +53,11 @@ const Dashboard = () => {
         </AppGradient>
 
         {/* Upcoming Appointments */}
-        <View className="mt-4 flex flex-row justify-between items-center">
+        <View className="mt-4 flex flex-row items-center justify-between">
           <Text className="text-2xl font-bold ">Upcoming Appointments</Text>
           <Text>View All</Text>
         </View>
-        <View className="my-2 flex flex-row rounded-2xl bg-white shadow shadow-slate-200 p-2">
+        <View className="my-2 flex flex-row rounded-2xl bg-white p-2 shadow shadow-slate-200">
           <View className="flex flex-row items-center justify-center">
             <View>
               <Image

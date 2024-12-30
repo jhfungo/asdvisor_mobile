@@ -8,7 +8,9 @@ const createpost = () => {
       <TextInput
         placeholder="Title"
         className="mb-5 text-4xl text-wrap"
-        onSubmitEditing={() => {bodyRef.current.focus()}}
+        onSubmitEditing={() => {
+          bodyRef.current.focus();
+        }}
         multiline={true}
         blurOnSubmit={true}
         returnKeyType="next"

@@ -13,6 +13,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors';
 import { Button } from 'react-native-paper';
+import React from 'react';
 
 const CustomDrawerContent = (props: any): ReactNode => {
   const pathName = usePathname();

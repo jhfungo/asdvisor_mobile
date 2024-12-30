@@ -1,5 +1,6 @@
 import { User } from '@supabase/supabase-js';
 import { router, Stack, useNavigation } from 'expo-router';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { View, Text, Image } from 'react-native';
 import PrimaryButton from '~/components/buttons/PrimaryButton';
