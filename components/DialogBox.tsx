@@ -1,7 +1,5 @@
-import { Button, Dialog, Portal, PaperProvider, Text } from 'react-native-paper';
-import { View } from 'react-native';
 import React from 'react';
-import { router } from 'expo-router';
+import { Button, Dialog, Text } from 'react-native-paper';
 
 interface DialogBoxProps {
   title: string;

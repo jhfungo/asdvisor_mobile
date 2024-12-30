@@ -1,5 +1,5 @@
-import { View, Text, Pressable, ImageBackground } from 'react-native';
 import React from 'react';
+import { View, Text, Pressable, ImageBackground } from 'react-native';
 
 interface ChildDetailCardProps {
   onPress: () => void;

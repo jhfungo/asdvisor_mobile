@@ -1,7 +1,7 @@
-import { View, Text, Pressable } from 'react-native';
 import React from 'react';
+import { View, Text } from 'react-native';
+
 import AppGradient from './AppGradient';
-import { Feather } from '@expo/vector-icons';
 
 interface ChildCardProps {
   ChildName: string;

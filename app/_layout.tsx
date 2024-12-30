@@ -1,10 +1,8 @@
-import { View, Text, Pressable } from 'react-native';
-import React from 'react';
 import { router, Stack } from 'expo-router';
+import React from 'react';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import '~/global.css';
 import { Button } from 'react-native-paper';
-import { FontAwesome5 } from '@expo/vector-icons';
 const RootLayout = () => {
   return (
     <RootSiblingParent>

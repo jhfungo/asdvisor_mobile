@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import React from 'react';
 import { cssInterop } from 'nativewind';
+import React from 'react';
 import { Pressable } from 'react-native';
 
 interface GradientProps {

@@ -1,7 +1,7 @@
-import { View, Text, Image } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { supabase } from '~/utils/supabase';
 import { UserMetadata } from '@supabase/supabase-js';
+import React, { useState } from 'react';
+import { View, Text, Image } from 'react-native';
+
 import userStore from '~/store/userStore';
 
 const Usermodal = () => {

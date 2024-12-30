@@ -1,6 +1,5 @@
-import { View, Text, Image } from 'react-native';
 import React from 'react';
-import { Title } from 'react-native-paper';
+import { View, Text, Image } from 'react-native';
 
 interface cardStyleProps {
   color?: string;
@@ -10,7 +9,8 @@ interface cardStyleProps {
 
 const Card = ({ color, textColor, title }: cardStyleProps) => {
   return (
-    <View className={`my-2 flex h-56 w-44 rounded-lg bg-purple-800 shadow shadow-slate-300   ${color}`}>
+    <View
+      className={`my-2 flex h-56 w-44 rounded-lg bg-purple-800 shadow shadow-slate-300   ${color}`}>
       <View>
         <Image
           source={require('~/assets/images/nurse.png')}

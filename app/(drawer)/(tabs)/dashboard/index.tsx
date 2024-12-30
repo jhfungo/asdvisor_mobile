@@ -1,14 +1,14 @@
-import { View, Text, Image } from 'react-native';
-import React, { useEffect } from 'react';
-import Toast from 'react-native-root-toast';
-import AppGradient from '~/components/AppGradient';
-import { ScrollView } from 'react-native-gesture-handler';
-import Card from '~/components/Card';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import Feather from '@expo/vector-icons/Feather';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
-import { supabase } from '~/utils/supabase';
+import React, { useEffect } from 'react';
+import { View, Text, Image } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+
+import AppGradient from '~/components/AppGradient';
+import Card from '~/components/Card';
 import userStore from '~/store/userStore';
+import { supabase } from '~/utils/supabase';
 
 const Dashboard = () => {
   const addUser = userStore((state) => state.setUser);

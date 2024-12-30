@@ -1,5 +1,5 @@
-import { View, Text, TextInput } from 'react-native';
 import React, { useRef } from 'react';
+import { View, TextInput } from 'react-native';
 
 const createpost = () => {
   const bodyRef = useRef();
