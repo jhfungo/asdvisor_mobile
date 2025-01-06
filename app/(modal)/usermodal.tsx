@@ -1,6 +1,7 @@
 import { UserMetadata } from '@supabase/supabase-js';
-import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import React, { Fragment, useState } from 'react';
+import { View, Text, Image, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import userStore from '~/store/userStore';
 
@@ -10,13 +11,14 @@ const Usermodal = () => {
   const [user_metadata, setUserMetadata] = useState<UserMetadata>();
   const user = userStore((user) => user);
   // console.log('authSession: ', user1);
+  const Wrapper = Platform.OS === 'android' ? SafeAreaView : React.Fragment;
 
   console.log(user);
   return (
-    <>
-      <Text className="mb-16 ml-2 mt-8 text-left text-6xl font-bold">User Profile</Text>
-      <View className="flex-1">
-        <View className="mb-8 items-center justify-center">
+    <Wrapper>
+      <Text className="ml-2 mt-8 text-left text-6xl font-bold">User Profile</Text>
+      <View className="flex-auto">
+        <View className="mb-8 mt-12 items-center justify-center">
           <Image
             source={require('~/assets/images/nurse.png')}
             resizeMode="contain"
@@ -39,7 +41,7 @@ const Usermodal = () => {
           </View>
         </View>
       </View>
-    </>
+    </Wrapper>
   );
 };
 

@@ -23,6 +23,12 @@ const ChildProfileStack = () => {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="addchildform"
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 };

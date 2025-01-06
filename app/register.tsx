@@ -73,8 +73,7 @@ const Register = () => {
       .from('user')
       .insert([
         { id, first_name: state.first_name, last_name: state.last_name, contact: state.contact },
-      ])
-      .select();
+      ]);
     console.log(data, error);
   };
 

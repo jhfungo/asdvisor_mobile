@@ -38,7 +38,7 @@ const childprofile = () => {
       <View className="absolute bottom-5 right-5">
         <Button
           mode="contained-tonal"
-          onPress={() => console.log('Pressed')}
+          onPress={() => router.push('/childprofile/addchildform')}
           className="items-center justify-center"
           contentStyle={{
             paddingVertical: 10,

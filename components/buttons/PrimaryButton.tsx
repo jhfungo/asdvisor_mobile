@@ -9,11 +9,13 @@ interface CustomButtonProps {
 
 const PrimaryButton = ({ onPress, title, containerStyles }: CustomButtonProps) => {
   return (
-    <View className={`w-4/5 rounded-md bg-purple-800 p-4 ${containerStyles}`}>
-      <Pressable className="items-center" onPress={onPress}>
+    <Pressable
+      onPress={onPress}
+      className={`w-4/5 rounded-md bg-purple-800 p-4 ${containerStyles}`}>
+      <View className="items-center">
         <Text className="text-white">{title}</Text>
-      </Pressable>
-    </View>
+      </View>
+    </Pressable>
   );
 };
 

@@ -25,6 +25,8 @@ const Dashboard = () => {
         .select('first_name, last_name, contact, role')
         .eq('id', id);
 
+      console.log(user);
+
       if (user)
         addUser(id, user[0].first_name, user[0].last_name, email, user[0].contact, user[0].role);
       console.log('DONE');
