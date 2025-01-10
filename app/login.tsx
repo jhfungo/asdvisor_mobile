@@ -57,8 +57,6 @@ const Login = () => {
       console.log('Error: ', error);
       setError(error?.message || 'An Unkown Error Occured');
     }
-    console.log('Data: ', data);
-    console.log('Error: ', error);
   };
 
   return (

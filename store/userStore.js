@@ -9,7 +9,7 @@ const userStore = create((set) => ({
   contact: '',
   role: '',
   setUser: (id, firstName, lastName, email, contact, role) => {
-    set((state) => {
+    set(() => {
       return { id, firstName, lastName, email, contact, role };
     });
   },

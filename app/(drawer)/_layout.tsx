@@ -15,13 +15,13 @@ import { black } from 'react-native-paper/lib/typescript/styles/themes/v2/colors
 import { Button } from 'react-native-paper';
 import React from 'react';
 
+let isDrawerShown = true;
+
 const CustomDrawerContent = (props: any): ReactNode => {
-  const pathName = usePathname();
   const logout = async () => {
     let { error } = await supabase.auth.signOut();
   };
-
-  console.log(pathName);
+  const pathName = usePathname();
 
   return (
     <DrawerContentScrollView {...props}>
@@ -120,7 +120,7 @@ const CustomDrawerContent = (props: any): ReactNode => {
         labelStyle={{ color: pathName === '/community' ? 'white' : '#000' }}
         style={{ backgroundColor: pathName === '/community' ? '#6b21a8' : 'white' }}
         onPress={() => {
-          router.push('/community');
+          router.push('/(drawer)/(communitytabs)/chat');
         }}
       />
       <DrawerItem
@@ -137,12 +137,27 @@ const CustomDrawerContent = (props: any): ReactNode => {
 };
 
 export default function Layout() {
+  const pathName = usePathname();
+  console.log(pathName);
+  const drawerPaths = [
+    '/dailycare',
+    '/childprofile',
+    '/dashboard',
+    '/caredecision',
+    '/appointment',
+    '/community',
+    '/chat',
+    '/',
+  ];
+
+  isDrawerShown = drawerPaths.includes(pathName);
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
         screenOptions={{
-          headerShown: true,
+          headerShown: isDrawerShown,
           headerTitle: 'ASDVisor',
+          swipeEnabled: isDrawerShown,
           headerTitleAlign: 'center',
           headerTintColor: '#6b21a8',
           headerTitleStyle: { color: 'black' },
@@ -152,7 +167,8 @@ export default function Layout() {
             </Pressable>
           ),
         }}
-        drawerContent={(props) => <CustomDrawerContent {...props} />}></Drawer>
+        drawerContent={(props) => <CustomDrawerContent {...props} />}
+      />
     </GestureHandlerRootView>
   );
 }

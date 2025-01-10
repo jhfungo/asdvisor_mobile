@@ -20,6 +20,7 @@ const Dailycare = () => {
   const state = articleStore((state) => state);
   const [loading, setLoading] = useState(true); // Track loading state
   const website = 'https://nizspdeeeeizctxbgawz.supabase.co/storage/v1/object/public/Images/';
+  // https://nizspdeeeeizctxbgawz.supabase.co/
   useEffect(() => {
     const getArticle = async () => {
       let { data: dailycare, error } = await supabase
@@ -42,7 +43,7 @@ const Dailycare = () => {
   const renderItem = ({ item }) => (
     <Pressable
       onPress={() => router.push({ pathname: '/dailycare/dailyarticles', params: { id: item.id } })}
-      className="my-2">
+      className="my-2 items-center">
       <DisplayCard title={item.title} author={item.author_id} image={`${website}${item.image}`} />
     </Pressable>
   );
@@ -52,7 +53,7 @@ const Dailycare = () => {
       {loading ? ( // Show loading indicator
         <ActivityIndicator size="large" color="#0000ff" />
       ) : (
-        <View className="mt-3 ">
+        <View className="mt-3">
           <FlatList
             contentContainerStyle={{ paddingBottom: 100 }}
             data={state.articles}

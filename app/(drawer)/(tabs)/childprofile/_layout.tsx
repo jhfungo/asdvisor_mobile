@@ -1,10 +1,13 @@
-import { View, Text } from 'react-native';
+import { View, Text, TurboModuleRegistry } from 'react-native';
 import React from 'react';
 import { Stack } from 'expo-router';
 
 const ChildProfileStack = () => {
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerBackTitleVisible: false,
+      }}>
       <Stack.Screen
         name="index"
         options={{
@@ -14,19 +17,22 @@ const ChildProfileStack = () => {
       <Stack.Screen
         name="childdetails"
         options={{
-          headerShown: false,
+          headerShown: true,
+          headerTitle: 'Child Details',
         }}
       />
       <Stack.Screen
         name="detailarticle"
         options={{
-          headerShown: false,
+          headerTitle: 'Details',
+          headerShown: true,
         }}
       />
       <Stack.Screen
         name="addchildform"
         options={{
-          headerShown: false,
+          headerTitle: 'Add Child Profile',
+          headerShown: true,
         }}
       />
     </Stack>

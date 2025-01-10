@@ -1,5 +1,4 @@
-import { View, Text, ScrollView, ActivityIndicator } from 'react-native';
-import { Image } from 'expo-image';
+import { View, Text, ScrollView, ActivityIndicator, Image } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { supabase } from '~/utils/supabase';
@@ -12,6 +11,8 @@ const Dailyarticles = () => {
   console.log(id);
   const articles = articleStore((state) => state.articles);
   const article = articles.find((article: any) => article.id === Number(id));
+  console.log(article);
+  console.log(article.image);
   return (
     <>
       <ScrollView>
@@ -26,7 +27,7 @@ const Dailyarticles = () => {
             )}
             <Image
               source={{ uri: `${website}${article.image}` }}
-              contentFit="cover"
+              resizeMode="cover"
               className="absolute left-0 top-0 h-72 w-full"
               onLoadStart={() => setIsLoading(true)} // Triggered when the image starts loading
               onLoadEnd={() => setIsLoading(false)} // Trigg

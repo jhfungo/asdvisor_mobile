@@ -33,6 +33,7 @@ const Dashboard = () => {
     };
     getUserMetadata();
   }, []);
+
   return (
     <ScrollView>
       <View className="mx-4 flex-1">
