@@ -174,11 +174,13 @@ const Chat = () => {
           />
         </View>
 
-        <PrimaryButton
-          title="Send"
-          onPress={() => sendMessage()}
-          containerStyles="w-1/4 mx-1 rounded-xl justify-center py-3 "
-        />
+        <View className="mx-2 w-1/4">
+          <PrimaryButton
+            title="Send"
+            onPress={() => sendMessage()}
+            containerStyles="rounded-xl justify-center py-3 "
+          />
+        </View>
       </View>
     </>
   );
