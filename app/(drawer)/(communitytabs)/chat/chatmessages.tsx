@@ -14,7 +14,7 @@ interface Message {
   recipient_id: string;
   created_at: string;
 }
-const Chat = () => {
+const ChatMessages = () => {
   const messageRef = useRef('');
   const inputRef = useRef<TextInput>(null);
   const scrollViewRef = useRef(null);
@@ -185,4 +185,4 @@ const Chat = () => {
     </>
   );
 };
-export default Chat;
+export default ChatMessages;
