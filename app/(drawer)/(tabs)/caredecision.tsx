@@ -4,10 +4,10 @@
 // import '~/global.css';
 import { decode } from 'base64-arraybuffer';
 import * as ImagePicker from 'expo-image-picker';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Button, Image, View } from 'react-native';
 import { TextInput } from 'react-native-paper';
-
+import * as FileSystem from 'expo-file-system';
 import userStore from '~/store/userStore';
 import { supabase } from '~/utils/supabase';
 
@@ -17,6 +17,8 @@ const Caredecision = () => {
   const [title, setTitle] = useState<string | undefined>('');
   const [content, setContent] = useState<string | undefined>('');
   let avatar64: string | null | undefined = '';
+  let video64: string | null | undefined = '';
+  const type = useRef('');
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -29,17 +31,50 @@ const Caredecision = () => {
     });
 
     if (!result.canceled) {
-      avatar64 = result.assets[0].base64;
-      // if (avatar64) {
-      //   const { data, error } = await supabase.storage
-      //     .from('Images')
-      //     .upload(`${userId}/${Date.now()}.png`, decode(avatar64));
-      // }
+      if (result.assets[0].type === 'image') {
+        avatar64 = result.assets[0].base64;
+        type.current = 'Images';
+      }
+
+      if (result.assets[0].type === 'video') {
+        type.current = 'Videos';
+        video64 = result.assets[0].uri;
+      }
     }
   };
 
   const onSubmit = async () => {
-    const fileName = `${userId}/${Date.now()}.png`;
+    const fileName =
+      type.current === 'Images' ? `${userId}/${Date.now()}.png` : `${userId}/${Date.now()}.mp4`;
+    console.log('Avatar64: ', avatar64);
+    if (avatar64) {
+      const { data: DataImage, error: ErrorImage } = await supabase.storage
+        .from(type.current)
+        .upload(fileName, decode(avatar64));
+
+      console.log('DataImage: ', DataImage);
+      console.log('Error Image', ErrorImage);
+      console.log('FileName: ', fileName);
+    }
+
+    if (video64) {
+      try {
+        const file = await FileSystem.readAsStringAsync(video64, {
+          encoding: FileSystem.EncodingType.Base64,
+        });
+
+        const { data, error } = await supabase.storage
+          .from(type.current)
+          .upload(fileName, decode(file));
+
+        if (error) {
+          console.log('Error uploading video: ', error);
+          console.log('Data', data);
+        }
+      } catch (e) {
+        console.log('Error reading video file: ', e.message);
+      }
+    }
 
     const { data, error } = await supabase
       .from('dailycare')
@@ -48,15 +83,6 @@ const Caredecision = () => {
     console.log(fileName);
     console.log(data);
     console.log(error);
-    if (avatar64) {
-      const { data: DataImage, error: ErrorImage } = await supabase.storage
-        .from('Images')
-        .upload(fileName, decode(avatar64));
-
-      console.log(DataImage);
-      console.log(ErrorImage);
-      console.log(fileName);
-    }
   };
 
   return (
