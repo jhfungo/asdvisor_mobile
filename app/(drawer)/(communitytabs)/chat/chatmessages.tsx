@@ -6,6 +6,10 @@ import { supabase } from '~/utils/supabase';
 import PrimaryButton from '~/components/buttons/PrimaryButton';
 import userStore from '~/store/userStore';
 import { ScrollView } from 'react-native-gesture-handler';
+import useChatApi from '~/hooks/useChatUpdateApi';
+import useGetChatApi from '~/hooks/useGetChatApi';
+import useTypingUpdateApi from '~/hooks/useTypingUpdateApi';
+import useChatQueryApi from '~/hooks/useChatQueryApi';
 
 interface Message {
   id: string;
@@ -23,103 +27,50 @@ const ChatMessages = () => {
   const jhosuaUid = '3b5c2c2d-ea7a-4b92-9a8f-d400c5879083';
   const blueUid = '76adba5a-b47a-4bad-82c7-a38336608b1c';
   const dynamicUID = userAuth.id === jhosuaUid ? blueUid : jhosuaUid;
-  const [typingUser, setTypingUser] = useState<string>('');
-
-  useFocusEffect(
-    useCallback(() => {
-      const channel = supabase
-        .channel('chat_changes')
-        .on(
-          'postgres_changes',
-          {
-            event: '*',
-            schema: 'public',
-            table: 'chat',
-          },
-          (payload) => {
-            const newRecord = payload.new as Message;
-            if (
-              newRecord.recipient_id === dynamicUID ||
-              newRecord.recipient_id === userAuth.id ||
-              newRecord.sender_id === userAuth.id ||
-              newRecord.sender_id === dynamicUID
-            )
-              setMessages((prev) => [...prev, newRecord]);
-          }
-        )
-        .subscribe();
-
-      const sub = supabase
-        .channel(`typing_changes`)
-        .on(
-          'postgres_changes',
-          {
-            event: 'UPDATE',
-            schema: 'public',
-            table: 'typing',
-            filter: `user_id=eq.${dynamicUID}`,
-          },
-          (payload) => {
-            const { user_id, is_typing, recipient_id } = payload.new;
-            setTypingUser((prev: string): string => {
-              if (is_typing && prev !== user_id && recipient_id === userAuth.id) {
-                return user_id;
-              }
-
-              if (!is_typing) {
-                return '';
-              }
-
-              return prev;
-            });
-          }
-        )
-        .subscribe();
-
-      return () => {
-        channel.unsubscribe();
-        sub.unsubscribe();
-      };
-    }, [])
-  );
+  const typingUser = useTypingUpdateApi(dynamicUID);
+  const chats = useGetChatApi();
+  const chat_changes = useChatApi(dynamicUID);
 
   useEffect(() => {
-    const fetchMessages = async () => {
-      const { data, error } = await supabase.from('chat').select(
-        // `*, recipient: user!chat_recipient_id_fkey(first_name, last_name), sender: user!chat_sender_id_fkey(first_name, last_name)
-        //   `
-        '*'
-      );
-      if (data) {
-        setMessages(data);
+    if (chats.messages) {
+      setMessages(chats.messages);
+    }
+  }, [chats.messages]);
+
+  useEffect(() => {
+    if (chat_changes.data) {
+      setMessages((prev) => (chat_changes.data ? [...prev, chat_changes.data] : prev));
+    }
+  }, [chat_changes.data]);
+
+  const isTyping = useCallback(
+    debounce(async (is_typing: boolean, user_id: string, recipient_id: string) => {
+      const { error } = await supabase
+        .from('typing')
+        .upsert({ user_id, recipient_id, is_typing }, { onConflict: ['user_id'] });
+
+      if (error) {
+        console.log('Error', error);
       }
-    };
-    fetchMessages();
-  }, []);
+    }, 300),
+    []
+  );
 
-  const isTyping = debounce(async (is_typing: boolean, user_id: string, recipient_id: string) => {
-    const { error } = await supabase
-      .from('typing')
-      .upsert({ user_id, recipient_id, is_typing }, { onConflict: ['user_id'] });
-
-    if (error) {
-      console.log('Error', error);
-    }
-  }, 300);
-
-  const handleTyping = (text: string) => {
-    const is_typing = text.length > 0;
-    messageRef.current = text;
-    isTyping(is_typing, userAuth.id, dynamicUID);
-    if (text.length === 0) {
-      messageRef.current = '';
-      inputRef.current?.clear();
-    }
-  };
+  const handleTyping = useCallback(
+    (text: string) => {
+      const is_typing = text.length > 0;
+      messageRef.current = text;
+      isTyping(is_typing, userAuth.id, dynamicUID);
+      if (text.length === 0) {
+        messageRef.current = '';
+        inputRef.current?.clear();
+      }
+    },
+    [userAuth.id, dynamicUID, isTyping]
+  );
 
   const sendMessage = async () => {
     if (messageRef.current.length === 0) return;
-
     const { data, error } = await supabase
       .from('chat')
       .insert([{ message: messageRef.current, sender_id: userAuth.id, recipient_id: dynamicUID }]);
